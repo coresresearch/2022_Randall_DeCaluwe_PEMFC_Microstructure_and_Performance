@@ -296,12 +296,12 @@ Species activity concentrations are calculated as the activity coefficient multi
     \hline \hline
     Reaction &Rate Constant               &Value         &Units      &Source \\
     \hline \vspace*{-3mm} \\
-    (\ref{eq:o2-gn}) \,\, ${\rm O_2(g) \leftrightharpoons O_2(N)}$ &$k_{\rm fwd,\ref{eq:o2-gn}}$   &$2.0\times10^{2}$ &m~s$^{-1}$ &assumed\\
-    (\ref{eq:h2o-gn}) \,\, ${\rm H_2O(g) \leftrightharpoons H_2O(N)}$ &$k_{\rm fwd,\ref{eq:h2o-gn}}$ &$2.0\times10^{2}$ &m~s$^{-1}$ &assumed\\
-    (\ref{eq:h2o-wn}) \,\, ${\rm H_2O(L) \leftrightharpoons H_2O(N)}$ &$k_{\rm fwd,\ref{eq:h2o-wn}}$ &$2.0\times10^{2}$ &m~s$^{-1}$ &assumed\\
-    (\ref{eq:h2o-gw}) \,\, ${\rm H_2O(g) \leftrightharpoons H_2O(L)}$ &$k_{\rm fwd,\ref{eq:h2o-gw}}$ &$2.0\times10^{2}$ &m~s$^{-1}$ &assumed\\
-    (\ref{eq:orr-1}) \,\, ${\rm O_2(N) + 2Pt(s) \leftrightharpoons 2O(s)}$ & $k_{\rm fwd,\ref{eq:orr-1}}$ &$1.9\times10^{12}$ &m$^5$~mol$^{-2}$~s$^{-1}$ &fit\\
-    (\ref{eq:orr-2}) \,\, ${\rm 2H^{+}(N) + 2e^{-}(ca) + O(s) \leftrightharpoons H_2O(N) + Pt(s)}$ &$j_{\rm o}^{*}$ &$4.5\times10^{-2}$ &A~m$^{6.5}$~mol$^{-2.5}$ &fit\\
+    (\ref{eq:o2-gn}) \,\, ${\rm O_2(g) \leftrightharpoons O_2(N)}$ &$k_{\rm fwd,\ref{eq:o2-gn}}$   &$2.0$ &m~s$^{-1}$ &assumed\\
+    (\ref{eq:h2o-gn}) \,\, ${\rm H_2O(g) \leftrightharpoons H_2O(N)}$ &$k_{\rm fwd,\ref{eq:h2o-gn}}$ &$2.0$ &m~s$^{-1}$ &assumed\\
+    (\ref{eq:h2o-wn}) \,\, ${\rm H_2O(L) \leftrightharpoons H_2O(N)}$ &$k_{\rm fwd,\ref{eq:h2o-wn}}$ &$2.0$ &m~s$^{-1}$ &assumed\\
+    (\ref{eq:h2o-gw}) \,\, ${\rm H_2O(g) \leftrightharpoons H_2O(L)}$ &$k_{\rm fwd,\ref{eq:h2o-gw}}$ &$2.0$ &m~s$^{-1}$ &assumed\\
+    (\ref{eq:orr-1}) \,\, ${\rm O_2(N) + 2Pt(s) \leftrightharpoons 2O(s)}$ & $k_{\rm fwd,\ref{eq:orr-1}}$ &$1.9\times10^{2}$ &m$^5$~mol$^{-2}$~s$^{-1}$ &fit\\
+    (\ref{eq:orr-2}) \,\, ${\rm 2H^{+}(N) + 2e^{-}(ca) + O(s) \leftrightharpoons H_2O(N) + Pt(s)}$ &$j_{\rm o}^{*}$ &$\,\,\,\,4.5\times10^{-15}$ &A~m$^{6.5}$~mol$^{-2.5}$ &fit\\
     \hline \hline
     \end{tabular}
     \label{tab:kinetics}
@@ -403,7 +403,7 @@ The open-source Cantera library handles the gas-phase transport parameters, spec
 
 The equations in section~\ref{sect:model-framework} are common throughout PEMFC modeling~\cite{bib:weber_2004, bib:weber_2014, bib:arif_2020}, and are extended here with novel structure-property relationships to predict CL transport parameters (e.g. $D_{k,\rm N}^{\rm av}, \ \sigma_{\rm io}$). These parameters are not well known for nano-thin Nafion films. Thus far models have commonly used $D_{k,\rm N}^{\rm av}$ and $\sigma_{\rm io}$ values measured from bulk Nafion membranes~\cite{bib:springer_1991, bib:weber_2004, bib:chu_2003, bib:ismail_2017, bib:aghighi_2017}. Literature over the last decade, however, has shown that transport through nano-thin Nafion films departs significantly from bulk membrane behavior~\cite{bib:decaluwe_2018, bib:paul_mccreery_2014, bib:paul_2014}, due to reduced water uptake and confinement effects near substrate interfaces~\cite{bib:dura_2009, bib:decaluwe_2018, bib:kusoglu_2012, bib:kusoglu_2017}.
 
-In our previous publication~\cite{bib:randall_2020}, we incorporated accurate transport parameters into a PEMFC model using structure-property relationships developed specifically for thin film Nafion. These relationships combined quantitative structural data from neutron reflectometry (NR) experiments~\cite{bib:decaluwe_2018} with separate conductivity measurements~\cite{bib:paul_mccreery_2014} -- both performed using nano-thin Nafion films. In this previous work, Nafion-phase water was assumed constant, equilibrated with a constant relative humidity gas phase. In this work, we allow the gas- and Nafion-phase water content to vary (and allow for liquid water condensation and evaporation), and have updated these relationships to depend upon varying local ionomer water content. This process is detailed below.
+In our previous publication~\cite{bib:randall_2020}, we incorporated accurate transport parameters in a PEMFC model using structure-property relationships developed specifically for thin film Nafion. These relationships combined quantitative structural data from neutron reflectometry (NR) experiments~\cite{bib:decaluwe_2018} with separate conductivity measurements~\cite{bib:paul_mccreery_2014} -- both performed using nano-thin Nafion films. In this previous work, Nafion-phase water was assumed constant, equilibrated with a constant relative humidity gas phase. In this work, we allow the gas- and Nafion-phase water content to vary (and allow for liquid water condensation and evaporation), and have updated these relationships to depend upon varying local ionomer water content. This process is detailed below.
 
 \subsection{Nafion-phase water}
 
@@ -607,7 +607,7 @@ In this section, detailed structure-property relationships, updated during the s
 \begin{figure*}[!htb]
     \centering
     \includegraphics[width=6.238in]{figures/bar-charts-6_238in.png}
-    \caption{Parametric study results highlighting the (a) maximum power density and (b) limiting current of each simulation. The red bar is for the base case. The remaining colors emphasize each parameter category: CL thickness (orange), Nafion shell thickness (green), Nafion distribution (blue), Pt distribution (purple), and dual graded Pt and Nafion distributions (black). Dashed lines mark the the base case performance for easier comparison against the others. Full parameter details for each simulation are summarized in table~\ref{tab:design-study}.}
+    \caption{Parametric study results highlighting the (a) maximum power density and (b) limiting current $j_{\rm Lim}$ of each simulation. The red bar is for the base case. The remaining colors emphasize each parameter category: CL thickness (orange), Nafion shell thickness (green), Nafion distribution (blue), Pt distribution (purple), and dual graded Pt and Nafion distributions (black). Dashed lines mark the the base case performance for easier comparison against the others. Full parameter details for each simulation are summarized in table~\ref{tab:design-study}.}
     \label{fig:bar-charts}
 \end{figure*}
 
