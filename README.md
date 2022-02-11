@@ -1,7 +1,7 @@
 # 2022_Randall_DeCaluwe_PEMFC_Microstructure_and_Performance
 2022 Paper modeling PEMFCs to understand and address limitations with low Pt loading.
 
-This repository contains the manuscript file, model files, model results, and figure creation files for our paper "Predicted Impacts of Pt and Ionomer Distributions on Low Pt-loading PEMFC Performance," currently in preparation for submission
+This repository contains the manuscript file, model files, model results, and figure creation files for our paper "Predicted Impacts of Pt and Ionomer Distributions on Low Pt-loaded PEMFC Performance," currently in preparation for submission
 
 The `Model` folder contains a "frozen" version of the model code used to generate the results presented herein. The actual code remains in active development, in a [separate repository](https://github.com/coresresearch/p2d_pemfc_2phase.git). Installation and use instructions are also provided there, in great detail.
 
