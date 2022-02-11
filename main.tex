@@ -74,7 +74,7 @@
 \begin{frontmatter}
 
 \title{Predicted Impacts of Pt and Ionomer Distributions \\ 
-       on Low Pt-loading PEMFC Performance}
+       on Low Pt-loaded PEMFC Performance}
 
 \author[CSM]{Corey R. Randall}
 \author[CSM]{Steven C. DeCaluwe \corref{cor}}
@@ -381,7 +381,7 @@ Assuming zero electronic current at the PEM interface, equation~(\ref{eq:ionic-b
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Simulation tools and model accessibility}
-In support of open science and research transparency, the model is available as a Github repository~\cite{bib:randall_2021}. The model is written in Python~\cite{bib:python_2022}; any interested party can run, modify, or extend the model under the permissive open source BSD 3-clause license. Directions for setting up a suitable environment within Python are included in the repository README .
+In support of open science and research transparency, the model is available as a Github repository~\cite{bib:randall_2021}, as well as all of the files needed to reproduce this manuscipt in its entirety~\cite{bib:pemfc_paper_2021}. The model is written in Python~\cite{bib:python_2022}; any interested party can run, modify, or extend the model under the permissive open source BSD 3-clause license. Directions for setting up a suitable environment within Python are included in the repository README .
 
 \subsection{Numerical integrator}
 The set of differential equations described above is integrated with the SciPy `solve\_ivp' routine, using the implicit `BDF' method~\cite{bib:scipy_2022}. We define a Jacobian pattern, which is provided to the solver to improve computational efficiency. A simulation time of $1 \times 10^6$~seconds ensures steady-state is reached at the open circuit condition. Afterward, the steady-state condition is saved and reused to initialize the state variables for the first user-defined current density. For each subsequent current density, the steady-state solution from the previous current density is used as the initial condition, which reduces the simulation time needed to reach steady state to less than 100~s (and typically much less than this). Implementing these computational efficiencies, a polarization curve is generated in roughly two minutes. 
