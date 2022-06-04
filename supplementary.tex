@@ -55,6 +55,9 @@
 \renewcommand{\thetable}{S\arabic{table}}
 \renewcommand{\theequation}{S\arabic{equation}}
 
+%% New commands
+\newcommand{\crr}[1]{\color{red} #1 \color{black}} % red field for edits
+
 %% Eliminates automatic footer note
 \makeatletter
 \def\ps@pprintTitle{%
@@ -172,7 +175,10 @@ We note here that although the Pt is represented by half spheres within the Nafi
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Supplementary figures}
-Figures~\ref{fig:validation_o2}--\ref{fig:Pt-distribution-study} present polarization and power density curves not reported in the main body of the manuscript.  Figure~\ref{fig:validation_o2} presents best fits of the model to validation data from Owejan, et. al~\cite{bib:owejan_2013} for an O$_2$-fed cathode.  These fits are for all three CL Nafion transport models.  The model provides a suitable qualitative fit for the `Uniform' and `Mixed' transport models.  However, especially compared to the air-fed cathode results in figure~\ref{fig:validation_air}, the model slightly under-predicts the difference between high and low Pt-loaded PEMFCs. It is likely that further refinement of model approaches or parameter estimates are required for a model that captures behavior of O$_2$-fed cells. Possible improvements which would capture additional limiting phenomena include:
+
+\crr{
+\subsection{Model validation}}
+Figure~\ref{fig:validation_o2} presents best fits of the model to validation data from Owejan, et. al~\cite{bib:owejan_2013} for an O$_2$-fed cathode. These fits are for all three CL Nafion transport models. The model provides a suitable qualitative fit for the `uniform' and `mixed' transport models. However, especially compared to the air-fed cathode results in figure~\ref{fig:validation_air}, the model slightly under-predicts the difference between high and low Pt-loaded PEMFCs. It is likely that further refinement of model approaches or parameter estimates are required for a model that captures behavior of O$_2$-fed cells. Possible improvements which would capture additional limiting phenomena include:
 \begin{itemize}
     \item Elementary two-step charge transfer reaction, rather than the global single-step reaction~(\ref{eq:orr-2}).
     \item Experimentally validated transport mechanism for O$_2$(N). The current approach assumes, based on geometric analysis, that O$_2$(N) diffusion coefficients scale with the local Nafion water volume fraction.
@@ -181,40 +187,80 @@ Figures~\ref{fig:validation_o2}--\ref{fig:Pt-distribution-study} present polariz
 \begin{figure}[H]
     \centering
     \includegraphics[width=6.47in]{figures/validation-o2-6_47in.png}
-    \caption{Simulation results and experimental data~\cite{bib:owejan_2013} for O$_2$-fed PEMFCs with varying Pt loading. Transport properties within thin-film Nafion are taken from (a) literature~\cite{bib:yadav_2012, bib:sethuraman_2009} and (b-c) structure-property relationships developed within this work. Differences between the (b) uniform and (c) mixed structure-property relationships are described in section~\ref{sect:struct-prop-relationships}.}
+    \caption{Simulation results and experimental data~\cite{bib:owejan_2013} for O$_2$-fed PEMFCs with varying Pt loading. Transport properties within thin-film Nafion are taken from (a) literature~\cite{bib:yadav_2012, bib:sethuraman_2009} and (b-c) structure-property relationships developed within this work. Differences between the (b) `uniform' and (c) `mixed' structure-property relationships are described in section~\ref{sect:struct-prop-relationships}.}
     \label{fig:validation_o2}
 \end{figure}
 
-Figure~\ref{fig:CL-thickness-study} shows polarization and power density curves for the air-fed PEMFC with varying CL thickness. As mentioned in the manuscript, thinner CLs reduce ion transport lengths, leading to lower Ohmic overpotentials and higher max power densities.  However, as seen in figure~\ref{fig:CL-thickness-study}(b), the max power with decreasing CL thickness occurs closer and closer to the PEMFC limiting current.
-\begin{figure}[H]
+\crr{Figure~\ref{fig:residuals-air} shows normalized residuals for simulation results compared to air-fed PEMFCs with varying Pt loadings. Residuals (${\rm res}_i$) are calculated as
+\begin{equation}
+    {\rm res}_i = \frac{V_{i, \rm mod} - V_{i, \rm dat}}{{\rm SD}_{i, \rm dat}},
+\end{equation}
+where $V_{i, \rm mod}$, $V_{i, \rm dat}$, and ${\rm SD}_{i, \rm dat}$ are the modeled cell potential, experimental cell potential, and experimental standard deviation taken at current density $i$, respectively. Residuals are highest when assuming that properties from bulk Nafion films, taken from literature, are the same in CL Nafion (figure~\ref{fig:residuals-air}(a)). This result emphasises the need for modelers to use accurate parameters. Although direct measurements to determine these parameters are experimentally challenging, many thin-film experiments provide valuable insight. In this work, we use these thin-film experiments to derive structure-property relationships for CL Nafion, see section~\ref{sect:struct-prop-relationships}. Incorporating these derived property methods improved model predictions at low Pt loading. This is shown by the reduced residuals in figures~\ref{fig:residuals-air}(b) and~(c). The main regions of improvement for the `uniform' and `mixed' methods occur for the lower Pt loadings, particularly at moderate to high current densities.}
+\begin{figure}[!t]
     \centering
-    \includegraphics[width=5.718in]{figures/CL-thickness-5_718in.png}
-    \caption{(a) Polarization and (b) power density curves for varying CL thicknesses. The 15~$\mu$m curves are from the model validation base case. Results suggest that thinner CLs improve performance, however, the maximum power density occurs closer to the limiting current.}
+    \includegraphics[width=6.436in]{figures/residuals-air-6_436in.png}
+    \crr{\caption{Residuals plots comparing simulation results to air-fed PEMFCs, from figure~\ref{fig:validation_air}. Transport parameters in thin film Nafion differ between (a) literature, (b) `uniform,' and (c) `mixed' methods, as described in section~\ref{sect:struct-prop-relationships}.}}
+    \label{fig:residuals-air}
+\end{figure}
+
+\crr{Figure~\ref{fig:residuals-o2} shows the normalized residuals for the simulation results compared to O$_2$-fed PEMFCs with varying Pt loadings. The most prominent feature in each residual plot occurs at low current densities, suggesting that improvements in kinetics are necessary when exercising the model using an O$_2$-fed cathode. As mentioned above, adopting a two-step charge transfer reaction and using experimentally validated reaction rate coefficients for O$_2$ absorption would likely lead to a large improvement. At present, having non-ideal kinetics when running the model with an O$_2$-fed cathode also overestimates losses for higher Pt loadings when adopting either the `uniform' or `mixed' structure-property relationships, as shown by the larger negative residuals for the 0.2~mg$_{\rm Pt}$~cm$^{-2}$ Pt loading in figures~\ref{fig:residuals-o2}(b) and (c).}
+\begin{figure}[!t]
+    \centering
+    \includegraphics[width=6.436in]{figures/residuals-o2-6_436in.png}
+    \crr{\caption{Residuals plots comparing simulation results to O$_2$-fed PEMFCs, from figure~\ref{fig:validation_o2}. Transport parameters in thin film Nafion differ between (a) literature, (b) `uniform,' and (c) `mixed' methods, as described in section~\ref{sect:struct-prop-relationships}.}}
+    \label{fig:residuals-o2}
+\end{figure}
+
+\newpage
+\crr{\subsection{Sensitivity analysis}
+While validating the model, the two kinetic rate constants for the two-step oxygen reduction reaction (ORR) were varied by hand until a minimum error between the data and model was achieved. A measure to compare model outputs against experimental data is determined using $\chi^2$, see section~\ref{sect:structure_prop_results}. All other kinetic rate constants (i.e. $k_{\rm fwd}$ for reactions~(\ref{eq:o2-gn})--(\ref{eq:h2o-gw})) were chosen assuming that the reactions would be fast, i.e. held near equilibrium. To ensure these `assumed' rate constants were sufficiently large, a sensitivity analysis was performed. The sensitivity is defined as
+\begin{equation}
+    {\rm Sensitivity} = \frac{\partial y}{\partial p} \frac{p_{\rm o}}{y_{\rm o}},
+\end{equation}
+where $y$ is a dependent variable and $p$ is an independent parameter. The initial values are $y_{\rm o}$ and $p_{\rm o}$. Sensitivities for the maximum power density of all Pt loadings and the goodness-of-fit statistic ($\chi^2$) with respect to each kinetic rate constant were calculated. Results are shown in figure~\ref{fig:sensitivity}. The sensitivities of each output with respect to the `assumed' rate constants were each $< 1\times10^{-5}$, making them too small to be visible in the figure. This also suggests that the rate constants were chosen to be large enough that reactions~(\ref{eq:o2-gn})--(\ref{eq:h2o-gw}) do not directly contribute to significant cell losses. Figure~\ref{fig:sensitivity}(a) shows that $\chi^2$ had the largest sensitivity to our two fitting parameters. Figure~\ref{fig:sensitivity}(b) shows the same information as (a), with the bars for $\chi^2$ removed to rescale the $y$-axis.
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=5.648in]{figures/sensitivity-5_648in.png}
+    \crr{\caption{\crr{Sensitivity analysis results for maximum power densities of each Pt loading and the goodness-of-fit statistic, $\chi^2$. Panel (b) shows the same sensitivities as panel (a) with the $\chi^2$ bars removed to rescale the $y$-axis.}}}
+    \label{fig:sensitivity}
+\end{figure}
+}
+
+\newpage
+\crr{\subsection{Catalyst layer design study}}
+Figures~\ref{fig:CL-thickness-study}--\ref{fig:Pt-distribution-study} present polarization and power density curves not reported in the main body of the manuscript. \crr{Maximum power densities and limiting currents from these curves are compared in figure~\ref{fig:bar-charts}.} Figure~\ref{fig:CL-thickness-study} shows polarization and power density curves for the air-fed PEMFC with varying CL thickness. As mentioned in the manuscript, thinner CLs reduce ion transport lengths, leading to lower Ohmic overpotentials and higher max power densities.  However, as seen in figure~\ref{fig:CL-thickness-study}(b), the max power with decreasing CL thickness occurs closer and closer to the PEMFC limiting current. 
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=5.718in]{figures_uniform/CL-thickness-5_718in.png}
+    \crr{
+    \caption{(a) Polarization and (b) power density curves for varying CL thicknesses. The 15~$\mu$m curves are from the model validation base case. Results suggest that thinner CLs improve performance, however, the maximum power density occurs closer to the limiting current.}}
     \label{fig:CL-thickness-study}
 \end{figure}
 
 Figure~\ref{fig:naf-thickness-study} shows results for varying Nafion shell thickness. As noted in the manuscript, results indicate that improved performance with increased ionic conductivity $\sigma_{\rm io}$ outweigh any deleterious effects from increased O$_2$ transport lengths between the pore and Pt catalyst surface. Moreover, losses due to transport through thicker Nafion are mitigated by the higher water volume fractions and larger amounts of dissolved oxygen in these thicker films.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=5.718in]{figures/naf-thickness-5_718in.png}
-    \caption{(a) Polarization and (b) power density curves for varying Nafion shell thicknesses. The 12~nm curves are from the model validation base case. Results suggest that when ionomer loading is uniform, thicker shells increase cell performance by lowering Ohmic resistance.}
+    \includegraphics[width=5.718in]{figures_uniform/naf-thickness-5_718in.png}
+    \crr{
+    \caption{(a) Polarization and (b) power density curves for varying Nafion shell thicknesses. The 12~nm curves are from the model validation base case. Results suggest that when ionomer loading is uniform, thicker shells increase cell performance by lowering Ohmic resistance.}}
     \label{fig:naf-thickness-study}
 \end{figure}
 
-\newpage
 Figure~\ref{fig:naf-distribution-study} shows performance with varying Nafion thickness distributions as a function of CL depth. As noted in the manuscript, the Nafion loading mainly impacts the limiting current $j_{\rm Lim}$, but has little impact on the maximum power density.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=5.718in]{figures/naf-distribution-5_718in.png}
-    \caption{(a) Polarization and (b) power density curves for varying ionomer distributions. The curves labeled `Equal Naf' are for the model validation base case where the ionomer is evenly distributed. Results suggest that randomly distributed and linearly graded Nafion between the gas diffusion layer and proton exchange membrane interfaces can improve limiting currents by reducing flooding.}
+    \includegraphics[width=5.718in]{figures_uniform/naf-distribution-5_718in.png}
+    \crr{
+    \caption{(a) Polarization and (b) power density curves for varying ionomer distributions. The curves labeled `Equal Naf' are for the model validation base case where the ionomer is evenly distributed. Results suggest that randomly distributed and linearly graded Nafion between the gas diffusion layer and proton exchange membrane interfaces can improve limiting currents by reducing flooding.}}
     \label{fig:naf-distribution-study}
 \end{figure}
 
-Lastly, figure~\ref{fig:Pt-distribution-study} shows predicted performance for cells with varying Pt distributions.  All three cells have a total, integrated loading of 0.025 mg$_{\rm Pt}$ cm$^{-2}$.  For `Equal Pt,' the Pt is uniformly distributed throughout the CL.  The `Linear' and `Exponential' profiles are for cells where the Pt is concentrated closer to the proton exchange membrane (PEM), as discussed in the manuscript. In theory, concentrating Pt closer to the PEM should reduce Ohmic losses and lead to higher maximum power. While we see slight increases to the maximum power density with non-uniform Pt distributions, these gains are negligible, especially when one considers the concomitant decreases in the limiting currents, due to flooding effects in the CL.
+Lastly, figure~\ref{fig:Pt-distribution-study} shows predicted performance for cells with varying Pt distributions. All three cells have a total, integrated loading of 0.025 mg$_{\rm Pt}$ cm$^{-2}$.  For `Equal Pt,' the Pt is uniformly distributed throughout the CL.  The `Linear' and `Exponential' profiles are for cells where the Pt is concentrated closer to the proton exchange membrane (PEM), as discussed in the manuscript. In theory, concentrating Pt closer to the PEM should reduce Ohmic losses and lead to higher maximum power. While we see slight increases to the maximum power density with non-uniform Pt distributions, these gains are negligible, especially when one considers the concomitant decreases in the limiting currents, due to flooding effects in the CL.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=5.718in]{figures/pt-distribution-5_718in.png}
-    \caption{(a) Polarization and (b) power density curves for varying Pt distributions. The curves labeled `Equal Pt' are for the model validation base case where the Pt is evenly distributed. Results suggest marginal improvements to power density for the graded Pt distributions at a significant cost of lower limiting currents.}
+    \includegraphics[width=5.718in]{figures_uniform/pt-distribution-5_718in.png}
+    \crr{
+    \caption{(a) Polarization and (b) power density curves for varying Pt distributions. The curves labeled `Equal Pt' are for the model validation base case where the Pt is evenly distributed. Results suggest marginal improvements to power density for the graded Pt distributions at a significant cost of lower limiting currents.}}
     \label{fig:Pt-distribution-study}
 \end{figure}
 
